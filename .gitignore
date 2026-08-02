@@ -1,0 +1,12 @@
+# Secret key material — never commit
+key.bin
+
+# Generated QR output
+qr_*.png
+
+# Python / venv
+.venv/
+venv/
+ARvenv/
+__pycache__/
+*.py[cod]
