@@ -43,6 +43,17 @@ def test_decode_frame_multi_qr_page():
         assert decode_frame(frame, key=KEY) == secret
 
 
+def test_decode_frame_downscaled_still_roundtrips():
+    """The live loop feeds ZBar a downscaled grayscale copy (max_dim) for speed;
+    a demo-sized secret must still round-trip through that path."""
+    secret = "meet at dawn - 0400 pier 7"
+    with tempfile.TemporaryDirectory() as d:
+        page = os.path.join(d, "page.png")
+        compose_page(secret, page, key=KEY)
+        frame = frame_from_image_file(page)
+        assert decode_frame(frame, key=KEY, max_dim=900) == secret
+
+
 def test_decode_frame_wrong_key_raises():
     """A frame that decodes+reassembles but fails GCM auth must raise InvalidTag,
     never return garbage — the live loop shows 'INVALID', never a fake secret."""
