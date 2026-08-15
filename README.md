@@ -1,4 +1,4 @@
-# Kitsune - encrypted-page privacy demo
+# Kitsune -- encrypted-page privacy demo
 
 ## What it is
 
